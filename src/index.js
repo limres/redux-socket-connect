@@ -1,5 +1,5 @@
 //
-export const namespace = "@@redux-socket.io-connect";
+export const namespace = "@@redux-socket-connect";
 
 //
 export const actionTypes = {
@@ -15,25 +15,17 @@ export const actionTypes = {
 };
 
 //
-export const dispatcherTypes = {
-  CLIENT: `${namespace}/CLIENT`,
-  SERVER: `${namespace}/SERVER`,
-};
-
-//
 export const defaultEventName = `${namespace}/EVENT`;
 
 //
 const defaultClientOptions = {
   eventName: defaultEventName,
-  dispatchedBy: dispatcherTypes.CLIENT,
   emitAll: false
 };
 
 //
 const defaultServerOptions = {
   eventName: defaultEventName,
-  dispatchedBy: dispatcherTypes.SERVER
 };
 
 //
@@ -130,9 +122,9 @@ export function createReduxEventEmitter(eventEmitter, userOptions = {}) {
   return (reducer) => {
     return (state, action = {}) => {
       const newState = reducer(state, action);
-      const { dispatchedBy, emit } = action.meta || {};
+      const { origin, emit } = action.meta || {};
 
-      if (dispatchedBy === dispatcherTypes.SERVER) {
+      if (origin === "server") {
         return newState;
       }
 
@@ -143,7 +135,7 @@ export function createReduxEventEmitter(eventEmitter, userOptions = {}) {
           ...action,
           meta: {
             ...action.meta,
-            dispatchedBy: options.dispatchedBy
+            origin: "client",
           }
         });
       }
@@ -180,7 +172,7 @@ function createContext(server, client, userOptions = {}) {
         ...action,
         meta: {
           ...action.meta,
-          dispatchedBy: options.dispatchedBy
+          origin: "server",
         }
       });
     },
@@ -189,7 +181,7 @@ function createContext(server, client, userOptions = {}) {
         ...action,
         meta: {
           ...action.meta,
-          dispatchedBy: options.dispatchedBy
+          origin: "server",
         }
       });
     },
@@ -198,7 +190,7 @@ function createContext(server, client, userOptions = {}) {
         ...action,
         meta: {
           ...action.meta,
-          dispatchedBy: options.dispatchedBy
+          origin: "server",
         }
       });
     }

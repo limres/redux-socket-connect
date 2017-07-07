@@ -1,9 +1,9 @@
-# redux-socket.io-connect
+# redux-socket-connect
 Redux socket.io connect provides a simple api for handling client-server communication that should feel very familiar to existing redux users.
 ## How to use
 ### Installation
 ```
-npm install redux-socket.io-connect --save
+npm install redux-socket-connect --save
 ```
 ### Example usage
 #### Client setup
@@ -11,7 +11,7 @@ Redux socket.io connect uses a higher order [redux reducer](https://github.com/r
 ```js
 import React from 'react';
 import { applyMiddleware, createStore, compose } from 'redux';
-import { createClient } from 'redux-socket.io-connect';
+import { createClient } from 'redux-socket-connect';
 import io from 'socket.io-client';
 
 import reducers from './reducers';
@@ -31,7 +31,7 @@ The server listens for dispatched actions and uses **handlers** which are very s
 import express from 'express';
 import http from 'http';
 import io from 'socket.io';
-import { createServer } from 'redux-socket.io-connect';
+import { createServer } from 'redux-socket-connect';
 
 import handlers from './handlers';
 
@@ -85,7 +85,7 @@ The handlers use a similar approach to [redux reducers](http://redux.js.org/docs
 ```
 You can use the `createHandler` and `combineHandlers` functions that behave in a similar way to their [redux counterparts](http://redux.js.org/docs/api/combineReducers.html) to aid in creating and composing handlers. The context provides access to a simple dispatch function that will relay an action back to the client who dispatched the original action.
 ```js
-import { createHandler } from 'redux-socket.io-connect';
+import { createHandler } from 'redux-socket-connect';
 
 export default createHandler({
   LOAD: (context, action) => {
@@ -135,7 +135,7 @@ The rest is left up to your imagination, redux socket.io connect provides you wi
 * `client` ([Client](http://socket.io/docs/client-api/)) the socket.io client used to send and receive events.
 * `[eventReducer]` (Function) --- optional reducer for manipulating the default socket.io actions dispatched by the middleware.
   ```js
-  import { actionTypes } from 'redux-socket.io-connect';
+  import { actionTypes } from 'redux-socket-connect';
 
   const actionReducer = (state, action) => {
     switch (action.type) {
@@ -163,16 +163,16 @@ The rest is left up to your imagination, redux socket.io connect provides you wi
 
 ##### Actions
 The middeware dispatches the following redux actions.
-* `@@redux-socket.io-connect/CONNECT` --- dispatched only once on first `connect` event from socket.io.
-* `@@redux-socket.io-connect/CONNECT_ERROR` --- dispatched only once on first `connect_error` event from socket.io.
-* `@@redux-socket.io-connect/CONNECT_TIMEOUT` --- dispatched only once on first `connect_timeout` event from socket.io.
-* `@@redux-socket.io-connect/RECONNECT` --- dispatched on every `reconnect` event  from socket.io.
-* `@@redux-socket.io-connect/RECONNECTING` --- dispatched on every `reconnecting` event  from socket.io.
-* `@@redux-socket.io-connect/RECONNECT_ERROR` --- dispatched on every `reconnect_error` event  from socket.io.
-* `@@redux-socket.io-connect/RECONNECT_FAILED` --- dispatched on every `reconnect_failed` event  from socket.io.
+* `@@redux-socket-connect/CONNECT` --- dispatched only once on first `connect` event from socket.io.
+* `@@redux-socket-connect/CONNECT_ERROR` --- dispatched only once on first `connect_error` event from socket.io.
+* `@@redux-socket-connect/CONNECT_TIMEOUT` --- dispatched only once on first `connect_timeout` event from socket.io.
+* `@@redux-socket-connect/RECONNECT` --- dispatched on every `reconnect` event  from socket.io.
+* `@@redux-socket-connect/RECONNECTING` --- dispatched on every `reconnecting` event  from socket.io.
+* `@@redux-socket-connect/RECONNECT_ERROR` --- dispatched on every `reconnect_error` event  from socket.io.
+* `@@redux-socket-connect/RECONNECT_FAILED` --- dispatched on every `reconnect_failed` event  from socket.io.
 
 ```js
-import { actionTypes } from 'redux-socket.io-connect';
+import { actionTypes } from 'redux-socket-connect';
 import { createReducer } from 'redux-create-reducer';
 
 const initialState = { connected: false, error: false };
@@ -192,7 +192,7 @@ export default reducer = createReducer(initialState, {
 ##### Paramaters
 * `client` ([Client](http://socket.io/docs/client-api/)) the socket.io client used to send and receive events.
 * `[userOptions]` (Object) --- optional configuration
-  * `dispatchedBy` (String) --- optional override to the value used to fill the `dispatchedBy` property that is automatically added to the `meta` property of actions dispatched by the client. [redux-socket.io-connect](https://github.com/michaelmitchell/redux-socket.io-connect)
+  * `dispatchedBy` (String) --- optional override to the value used to fill the `dispatchedBy` property that is automatically added to the `meta` property of actions dispatched by the client. [redux-socket-connect](https://github.com/michaelmitchell/redux-socket-connect)
   * `emitAll` (Boolean) ---  if `true` all actions will be dispatched to the server by default otherwise the default value is `false`.
   * `eventName` (String) ---  optional override to the event name used by the event emitter when sending requests to the server, this should match the `eventName` used by the server.
 

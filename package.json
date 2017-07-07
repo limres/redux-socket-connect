@@ -1,14 +1,14 @@
 {
-  "name": "redux-socket.io-connect",
-  "version": "0.4.2",
-  "description": "redux-socket.io-connect",
-  "homepage": "https://github.com/michaelmitchell/redux-socket.io-connect",
+  "name": "@limres/redux-socket-connect",
+  "version": "0.4.3",
+  "description": "redux-socket-connect",
+  "homepage": "https://github.com/michaelmitchell/redux-socket-connect",
   "repository": {
     "type": "git",
-    "url": "https://github.com/michaelmitchell/redux-socket.io-connect.git"
+    "url": "https://github.com/michaelmitchell/redux-socket-connect.git"
   },
   "bugs": {
-    "url": "https://github.com/michaelmitchell/redux-socket.io-connect/issues"
+    "url": "https://github.com/michaelmitchell/redux-socket-connect/issues"
   },
   "license": "MIT",
   "keywords": [
